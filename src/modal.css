@@ -1,0 +1,17 @@
+.modal-main {
+  position: absolute;
+  margin: 0 auto;
+  top: 0;
+  left: 550px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: auto;
+  background: rgb(144, 185, 149);
+}
+
+.card-imgv {
+  width: 50px;
+  height: 40px;
+}

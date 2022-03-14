@@ -1,0 +1,16 @@
+.card-img-top {
+  height: 80px;
+  
+}
+.vuvu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.card {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
