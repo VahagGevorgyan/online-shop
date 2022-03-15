@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CardView({ item, addItem,addItemCount }) {
+export default function CardView({ item, addItem,addItemCount,subItemCount }) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -22,7 +22,7 @@ export default function CardView({ item, addItem,addItemCount }) {
               +
             </button>
             <span>{item.count}</span>
-            <button onClick={() => sub()} className="btn btn-primary btn-sm">
+            <button onClick={() => subItemCount(item)} className="btn btn-primary btn-sm">
               -
             </button>
           </div>

@@ -13,11 +13,16 @@ function App() {
   }
 
   function addItemCount(item) {
-    //  setCount((prev) => prev + 1);
-    console.log(item);
     setBasketItems((prev) =>
       prev.map((el) =>
         el.id === item.id ? { ...el, count: el.count + 1 } : el
+      )
+    );
+  }
+  function subItemCount(item) {
+    setBasketItems((prev) =>
+      prev.map((el) =>
+        el.id === item.id ? { ...el, count: el.count - 1 } : el
       )
     );
   }
@@ -32,7 +37,7 @@ function App() {
   return (
     <div className="container">
       <Headers basketItems={basketItems} openModal={openModal} />
-      <Card data={data} addItem={addItem} addItemCount={addItemCount} />
+      <Card data={data} addItem={addItem} addItemCount={addItemCount} subItemCount={subItemCount} />
       {isOpenModal && (
         <Modal
           onClose={() => setIsOpenModal(false)}
