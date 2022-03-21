@@ -6,11 +6,15 @@ export default function Modal(props) {
       {props.basketItems.map((item) => {
         console.log(item);
         return (
-          <div>
-            <p>{item.price}</p>
+          <div key={item.id}>
+            <span>{item.price}</span>
             <h4>{item.title}</h4>
             <img className="card-imgv" src={item.images[0]} />
-            <p>{item.count}</p>
+            <span>{item.count}</span>
+            <button onClick={()=>props.onDelete(item.id)}>delete</button>
+            <button onClick={()=>props.addItemCount(item)}>+</button>
+            <button onClick={()=>props.subItemCount(item)}>-</button>
+
           </div>
         );
       })}

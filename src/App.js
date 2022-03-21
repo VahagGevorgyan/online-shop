@@ -11,7 +11,9 @@ function App() {
   function addItem(obj) {
     setBasketItems((prev) => [...prev, obj]);
   }
-
+  function deletProductFromBusket(id) {
+    setBasketItems(basketItems.filter((item) => id !== item.id));
+  }
   function addItemCount(item) {
     setBasketItems((prev) =>
       prev.map((el) =>
@@ -22,7 +24,7 @@ function App() {
   function subItemCount(item) {
     setBasketItems((prev) =>
       prev.map((el) =>
-        el.id === item.id ? { ...el, count: el.count - 1 } : el
+        el.id === item.id && el.count > 0 ? { ...el, count: el.count - 1 } : el
       )
     );
   }
@@ -37,11 +39,20 @@ function App() {
   return (
     <div className="container">
       <Headers basketItems={basketItems} openModal={openModal} />
-      <Card data={data} addItem={addItem} addItemCount={addItemCount} subItemCount={subItemCount} />
+      <Card
+        data={data}
+        addItem={addItem}
+        addItemCount={addItemCount}
+        subItemCount={subItemCount}
+        basketItems={basketItems}
+      />
       {isOpenModal && (
         <Modal
           onClose={() => setIsOpenModal(false)}
           basketItems={basketItems}
+          onDelete={deletProductFromBusket}
+          addItemCount={addItemCount}
+          subItemCount={subItemCount}
         />
       )}
     </div>

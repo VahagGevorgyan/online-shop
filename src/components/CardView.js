@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function CardView({ item, addItem,addItemCount,subItemCount }) {
+export default function CardView({
+  item,
+  addItem,
+  addItemCount,
+  subItemCount,
+  basketItem,
+}) {
+  // const myVisible = basketItem?.count ? true : false;
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  function sub() {
-    if (count > 0) {
-      setCount((prev) => prev - 1);
+  useEffect(() => {
+    setIsVisible(basketItem ? true : false);
+  }, [basketItem]);
+  
+  function addProductToBasket() {
+    if (count >= 0) {
+      const newObj = { ...item, count: count };
+      addItem(newObj);
+      setCount(0);
+      setIsVisible(true);
     }
   }
   return (
@@ -18,29 +32,22 @@ export default function CardView({ item, addItem,addItemCount,subItemCount }) {
       <div className="buttons">
         {isVisible && (
           <div>
-            <button onClick={() => addItemCount(item)} className="btn btn-primary btn-sm">
+            <button
+              onClick={() => addItemCount(item)}
+              className="btn btn-primary btn-sm"
+            >
               +
             </button>
-            <span>{item.count}</span>
-            <button onClick={() => subItemCount(item)} className="btn btn-primary btn-sm">
+            <span>{basketItem?.count || 0}</span>
+            <button
+              onClick={() => subItemCount(item)}
+              className="btn btn-primary btn-sm"
+            >
               -
             </button>
           </div>
         )}
-        {!isVisible && (
-          <button
-            onClick={() => {
-              if (count >= 0) {
-                const newObj = { ...item, count: count };
-                addItem(newObj);
-                setCount(0);
-                setIsVisible(true);
-              }
-            }}
-          >
-            add
-          </button>
-        )}
+        {!isVisible && <button onClick={addProductToBasket}>add</button>}
       </div>
     </div>
   );
