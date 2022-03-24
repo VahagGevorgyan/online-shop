@@ -8,6 +8,7 @@ function App() {
   const [data, setData] = useState([]);
   const [basketItems, setBasketItems] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
+
   function addItem(obj) {
     setBasketItems((prev) => [...prev, obj]);
   }
